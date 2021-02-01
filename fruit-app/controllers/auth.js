@@ -1,9 +1,11 @@
-require('dotenv').config();
-
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 
 const User = require('../models').User;
+
+
+const bcrypt = require('bcryptjs');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+
 
 const renderSignup = (req, res) => {
     res.render('users/signup.ejs')
@@ -11,8 +13,7 @@ const renderSignup = (req, res) => {
 
 const signup = (req, res) => {
     bcrypt.genSalt(10, (err, salt) => {
-        if(err){
-            return res.send(err);
+        if(err){      return res.send(err);
         }
         bcrypt.hash(req.body.password, salt, (err, hashedPwd) => {
             if(err){
